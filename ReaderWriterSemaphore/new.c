@@ -76,8 +76,9 @@ int rwSem_init(void){
     {
         // Preparing the device and handling some ERRORS:
         if ((result = alloc_chrdev_region(&dev, 0, number_of_minors, "rwSem")) < 0){
-            printk(KERN_INFO "Error occurred !");
+            printk(KERN_INFO "Error occurred in allocation of range");
             /*
+	     register a range of char device numbers
              alloc_chrdev_region
              params:
                  dev - output parameter for first assigned number
@@ -98,19 +99,21 @@ int rwSem_init(void){
                  from -  the first in the range of numbers to unregister
                  count  - the number of device numbers to unregister
              */
-            printk(KERN_INFO "Error occurred !");
+            printk(KERN_INFO "Error occurred in adding a char device to the system!");
             return result;
         }
         // Creating the class
-        if (IS_ERR(myClass = class_create(THIS_MODULE, "chardrv"))){
-            cdev_del(&char_dev);
+        if (IS_ERR(myClass = class_create(THIS_MODULE, "ccdev"))){
+            cdev_del(&char_dev);//removes a cdev from the system
+	    //class_create - creates a struct class structure
             unregister_chrdev_region(dev, number_of_minors);
-            printk(KERN_INFO "Error occurred !");
+            printk(KERN_INFO "Error occurred in class creation !");
             return PTR_ERR(myClass);
         }
         // Device creating
         if (IS_ERR(dev_1 = device_create(myClass, NULL, dev, NULL, "alikhan%d", 0))){
             /*
+		
                 device_create
                 params:
                     class
@@ -121,7 +124,7 @@ int rwSem_init(void){
             class_destroy(myClass);
             cdev_del(&char_dev);
             unregister_chrdev_region(dev, number_of_minors);
-            printk(KERN_INFO "Error occurred !");
+            printk(KERN_INFO "Error occurred in device creation !");
             return PTR_ERR(dev_1);
         }
     }
