@@ -1,3 +1,3 @@
-/home/alikhan/Desktop/wee/threads1.ko
-/home/alikhan/Desktop/wee/threads1.o
+/home/alikhan/Desktop/System-Programming/Kernel_threads/threads1.ko
+/home/alikhan/Desktop/System-Programming/Kernel_threads/threads1.o
 
