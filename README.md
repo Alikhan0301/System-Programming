@@ -1,6 +1,5 @@
 # System-Programming
 Kernel threads project
-Solving a side effects of multitasking
 
 in Kernel_threads :
 
