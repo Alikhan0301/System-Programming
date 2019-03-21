@@ -16,7 +16,6 @@ Any number of readers can read from the shared resource simultaneously, but only
 
 useful links : 
 
-file:///Users/alikhanokas/Downloads/x569%20(1).html
 https://github.com/torvalds/linux/blob/master/kernel/locking/semaphore.c
 https://github.com/torvalds/linux/blob/master/kernel/kthread.c
 
